@@ -11,12 +11,12 @@ const authenticateToken = (req, res, next) => {
         return res.status(401).json({ message: 'Unauthorized - Token not provided' });
     }
 
-    jwt.verify(tokenWithoutBearer, secretKey, (err, user) => {
+    jwt.verify(tokenWithoutBearer, secretKey, (err, userId) => {
         if (err) {
             console.error('Error verifying token:', err);
             return res.status(403).json({ message: 'Forbidden - Token verification failed' });
         }
-        req.user = user;
+        req.userId = userId;
         next();
     });
 };

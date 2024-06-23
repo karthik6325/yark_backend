@@ -1,36 +1,95 @@
 const mongoose = require('mongoose');
 
+// Define child schema
+const childSchema = new mongoose.Schema({
+  name: {
+    type: String,
+  },
+  dob: {
+    type: Date,
+  },
+  gender: {
+    type: String,
+    enum: ['male', 'female', 'other'],
+  },
+});
+
+// Define spouse schema
+const spouseSchema = new mongoose.Schema({
+  name: {
+    type: String,
+  },
+  dob: {
+    type: Date,
+  },
+  gender: {
+    type: String,
+    enum: ['male', 'female', 'other'],
+  },
+});
+
+// Define parent schema
+const parentSchema = new mongoose.Schema({
+  fatherName: {
+    type: String,
+  },
+  fatherDOB: {
+    type: Date,
+  },
+  motherName: {
+    type: String,
+  },
+  motherDOB: {
+    type: Date,
+  },
+});
+
+// Define sibling schema
+const siblingSchema = new mongoose.Schema({
+  name: {
+    type: String,
+  },
+  dob: {
+    type: Date,
+  },
+  gender: {
+    type: String,
+    enum: ['male', 'female', 'other'],
+  },
+});
+
+// Define user schema
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
   },
   email: {
     type: String,
     unique: true,
-    required: true,
+  },
+  verified: {
+    type: Boolean,
   },
   password: {
     type: String,
-    required: true,
   },
   dob: {
     type: Date,
-    required: true,
   },
   location: {
     type: String,
-    required: true,
   },
   phoneNumber: {
     type: String,
-    required: true,
   },
   username: {
+
     type: String,
-    unique: true,
-    required: true,
   },
+  children: [childSchema],
+  spouse: spouseSchema,
+  parents: [parentSchema],
+  siblings: [siblingSchema],
 });
 
 module.exports = mongoose.model('User', userSchema);
