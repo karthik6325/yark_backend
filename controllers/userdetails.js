@@ -27,7 +27,6 @@ const User = require('../model/usermodel');
   exports.getUserDetails = async (req, res) => {
       try {
         const { userId } = req.body;
-        console.log("hghj")
       // Check if user exists with the provided email
       let existingUser = await User.findOne({ userId });
   

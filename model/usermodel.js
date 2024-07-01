@@ -16,13 +16,13 @@ const childSchema = new mongoose.Schema({
 
 // Define spouse schema
 const spouseSchema = new mongoose.Schema({
-  name: {
+  spouseName: {
     type: String,
   },
-  dob: {
+  spouseDOB: {
     type: Date,
   },
-  gender: {
+  spouseGender: {
     type: String,
     enum: ['male', 'female', 'other'],
   },
@@ -58,6 +58,22 @@ const siblingSchema = new mongoose.Schema({
   },
 });
 
+// Define in-law schema
+const inLawSchema = new mongoose.Schema({
+  fatherInLawName: {
+    type: String,
+  },
+  fatherInLawDOB: {
+    type: Date,
+  },
+  motherInLawName: {
+    type: String,
+  },
+  motherInLawDOB: {
+    type: Date,
+  },
+});
+
 // Define user schema
 const userSchema = new mongoose.Schema({
   name: {
@@ -83,13 +99,21 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   username: {
-
     type: String,
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
+  membership: {
+    type: String,
+    default: "bronze",
   },
   children: [childSchema],
   spouse: spouseSchema,
   parents: [parentSchema],
   siblings: [siblingSchema],
+  inLaws: [inLawSchema],
 });
 
 module.exports = mongoose.model('User', userSchema);
