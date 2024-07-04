@@ -1,12 +1,13 @@
 const User = require('../model/usermodel'); 
 
-  exports.userDetails = async (req, res) => {
-    const { userId } = req.body;
+const { ObjectId } = require('mongodb');
 
-    
+  exports.userDetails = async (req, res) => {
+    const { userId } = req.userId;
     try {
       // Check if user exists with the provided email
-      let existingUser = await User.findOne({ userId });
+      let existingUser = await User.findOne({ _id: new ObjectId(userId) });
+      console.log("user", existingUser)
   
       if (existingUser) {
         // Update existing user with new details
@@ -26,9 +27,11 @@ const User = require('../model/usermodel');
 
   exports.getUserDetails = async (req, res) => {
       try {
-        const { userId } = req.body;
+        const { userId } = req.userId;
+        console.log(req)
       // Check if user exists with the provided email
-      let existingUser = await User.findOne({ userId });
+      let existingUser = await User.findOne({ _id: new ObjectId(userId) });
+      console.log(existingUser)
   
       if (existingUser) {
         res.status(200).json(existingUser);

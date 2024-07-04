@@ -126,8 +126,10 @@ exports.login = async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
+    console.log(user)
     const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
-    res.status(200).json({ message: 'Login successful', token });
+    if(user.parents && user.parents.length === 0) res.status(200).json({ message: 'Login successful', token, detailsRequired: true });
+    else res.status(200).json({ message: 'Login successful', token, detailsRequired: false });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server Error' });

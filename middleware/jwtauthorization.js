@@ -16,6 +16,7 @@ const authenticateToken = (req, res, next) => {
             console.error('Error verifying token:', err);
             return res.status(403).json({ message: 'Forbidden - Token verification failed' });
         }
+        console.log("user", userId)
         req.userId = userId;
         next();
     });
