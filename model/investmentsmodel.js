@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const lifeInsuranceSchema = new mongoose.Schema({
-  PolicyName: { type: String, required: true },
+  Number: { type: String, required: true },
   PolicyStartDate: { type: Date, required: true },
   ProposedName: { type: String },
   LifeInsuredName: { type: String },
@@ -20,10 +20,10 @@ const lifeInsuranceSchema = new mongoose.Schema({
 });
 
 const investmentPortfolioSchema = new mongoose.Schema({
-  PortfolioName: { type: String, required: true },
+  Number: { type: String, required: true },
   SchemeName: { type: String },
-  SIPLumpsum: { type: String }, // Example: SIP/lumpsum
-  CommittedForYears: { type: Number }, // Committed for (years)
+  SIPLumpsum: { type: String }, 
+  CommittedForYears: { type: Number }, 
   CurrentValue: { type: Number },
   MaturityDate: { type: Date },
   ExpectedReturns: { type: Number },
@@ -39,11 +39,7 @@ const otherInvestmentsSchema = new mongoose.Schema({
 });
 
 const investmentSchema = new mongoose.Schema({
-  UserID: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', 
-    required: true
-  },
+  userId: { type: String, required: true },
   lifeInsurance: [lifeInsuranceSchema],
   investmentPortfolio: [investmentPortfolioSchema],
   otherInvestmets: [otherInvestmentsSchema],

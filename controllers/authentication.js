@@ -65,7 +65,6 @@ exports.checkVerify = async (req, res) => {
 };
 
 exports.verifyOtp = async (req, res) => {
-  console.log("verify");
   const { email, otp } = req.body;
   if (!email || !otp) {
     return res.status(400).send('Email and OTP are required');
@@ -82,7 +81,6 @@ exports.verifyOtp = async (req, res) => {
 };
 
 exports.register = async (req, res) => {
-  console.log("register");
   try {
     const { name, email, password, dob, location, phoneNumber, username } = req.body;
     const existingUser = await User.findOne({ email });
@@ -126,7 +124,6 @@ exports.login = async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
-    console.log(user)
     const token = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1h' });
     if(user.parents && user.parents.length === 0) res.status(200).json({ message: 'Login successful', token, detailsRequired: true });
     else res.status(200).json({ message: 'Login successful', token, detailsRequired: false });

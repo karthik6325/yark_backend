@@ -10,7 +10,7 @@ const childSchema = new mongoose.Schema({
   },
   gender: {
     type: String,
-    enum: ['male', 'female', 'other'],
+    enum: ['','male', 'female', 'other'],
   },
 });
 
@@ -24,7 +24,7 @@ const spouseSchema = new mongoose.Schema({
   },
   spouseGender: {
     type: String,
-    enum: ['male', 'female', 'other'],
+    enum: ['','male', 'female', 'other'],
   },
 });
 
@@ -54,7 +54,7 @@ const siblingSchema = new mongoose.Schema({
   },
   gender: {
     type: String,
-    enum: ['male', 'female', 'other'],
+    enum: ['', 'male', 'female', 'other'],
   },
 });
 

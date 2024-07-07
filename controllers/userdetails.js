@@ -7,7 +7,6 @@ const { ObjectId } = require('mongodb');
     try {
       // Check if user exists with the provided email
       let existingUser = await User.findOne({ _id: new ObjectId(userId) });
-      console.log("user", existingUser)
   
       if (existingUser) {
         // Update existing user with new details
@@ -28,10 +27,8 @@ const { ObjectId } = require('mongodb');
   exports.getUserDetails = async (req, res) => {
       try {
         const { userId } = req.userId;
-        console.log(req)
       // Check if user exists with the provided email
       let existingUser = await User.findOne({ _id: new ObjectId(userId) });
-      console.log(existingUser)
   
       if (existingUser) {
         res.status(200).json(existingUser);
