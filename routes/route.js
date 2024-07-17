@@ -2,6 +2,7 @@ const { register, login, sendOtp, verifyOtp, checkVerify } = require('../control
 const { userDetails, getUserDetails } = require('../controllers/userdetails');
 const { addInvestment, updateInvestment, deleteInvestment, getAllInvestments } = require('../controllers/userInvestments')
 const { getAllUsers } = require('../controllers/adminContols')
+const { addInsurance, getAllInsurance } = require('../controllers/healthinsurance')
 const authenticateToken = require('../middleware/jwtauthorization');
 
 const router = require('express').Router();
@@ -18,6 +19,16 @@ router.post('/register', register)
 .delete('/deleteinvest',authenticateToken, deleteInvestment)
 .get('/getinvests', authenticateToken, getAllInvestments)
 .get('/allusers',authenticateToken, getAllUsers)
+.post('/folders', authenticateToken, )
+.get('/folders', authenticateToken, )
+.put('/api/folders/:id', authenticateToken, )
+.delete('/api/folders/:id', authenticateToken, )
+.post('/api/folders/:id/documents', authenticateToken, )
+.put('/api/folders/:folderId/documents/:documentId', authenticateToken, )
+.delete('/api/folders/:folderId/documents/:documentId', authenticateToken, )
+.post('/insurance', authenticateToken, addInsurance)
+.get('/insurance', authenticateToken, getAllInsurance)
+
 
 
 module.exports = router;

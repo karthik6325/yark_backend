@@ -21,6 +21,7 @@ const lifeInsuranceSchema = new mongoose.Schema({
 
 const investmentPortfolioSchema = new mongoose.Schema({
   Number: { type: String, required: true },
+  InvestmentType: { type: String },
   SchemeName: { type: String },
   SIPLumpsum: { type: String }, 
   CommittedForYears: { type: Number }, 
