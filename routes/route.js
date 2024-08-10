@@ -3,9 +3,13 @@ const { userDetails, getUserDetails } = require('../controllers/userdetails');
 const { addInvestment, updateInvestment, deleteInvestment, getAllInvestments } = require('../controllers/userInvestments')
 const { getAllUsers } = require('../controllers/adminContols')
 const { addInsurance, getAllInsurance } = require('../controllers/healthinsurance')
+const { addReview, getApprovedReviews, getPendingReviews, acceptRequest, rejectRequest } = require('../controllers/review')
 const authenticateToken = require('../middleware/jwtauthorization');
+const multer = require('multer');
 
 const router = require('express').Router();
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 router.post('/register', register)
 .post('/login', login)
@@ -28,7 +32,13 @@ router.post('/register', register)
 .delete('/api/folders/:folderId/documents/:documentId', authenticateToken, )
 .post('/insurance', authenticateToken, addInsurance)
 .get('/insurance', authenticateToken, getAllInsurance)
-
+.post('/review', upload.single('image'), addReview)
+.get('/reviews', getPendingReviews)
+.get('/reviews/approved', getApprovedReviews)
+.post('/reviews/update', getApprovedReviews)
+.post('/review/accept', acceptRequest)
+.post('/review/reject', rejectRequest)
+.get('/reviews/accepted', getApprovedReviews)
 
 
 module.exports = router;
