@@ -1,5 +1,5 @@
 const { register, login, sendOtp, verifyOtp, checkVerify } = require('../controllers/authentication');
-const { userDetails, getUserDetails } = require('../controllers/userdetails');
+const { userDetails, getUserDetails, sendMail } = require('../controllers/userdetails');
 const { addInvestment, updateInvestment, deleteInvestment, getAllInvestments } = require('../controllers/userInvestments')
 const { getAllUsers } = require('../controllers/adminContols')
 const { addInsurance, getAllInsurance } = require('../controllers/healthinsurance')
@@ -39,6 +39,7 @@ router.post('/register', register)
 .post('/review/accept', acceptRequest)
 .post('/review/reject', rejectRequest)
 .get('/reviews/accepted', getApprovedReviews)
+.post('/contact', sendMail)
 
 
 module.exports = router;

@@ -1,3 +1,5 @@
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const User = require('../model/usermodel'); 
 
 const { ObjectId } = require('mongodb');
@@ -40,3 +42,24 @@ const { ObjectId } = require('mongodb');
       res.status(500).json({ error: 'Internal server error' });
     }
   };
+
+  
+  exports.sendMail = async (req, res) => {
+    const { name, mobile, email, support } = req.body;
+  
+    const msg = {
+      to: 'ceo.yark@gmail.com',
+      from: 'finance.yark@gmail.com',
+      subject: 'Contact Form Submission',
+      text: `Name: ${name}\nMobile: ${mobile}\nEmail: ${email}\nSupport needed: ${support}`,
+    };
+  
+    try {
+      await sgMail.send(msg);
+      res.status(200).send('Email sent successfully');
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
+  
